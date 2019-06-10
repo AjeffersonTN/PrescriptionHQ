@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace PrescriptionHQ.Models
 {
-    public class Pharmacy: IdentityUser
+    public class Pharmacy
     {
         [Key]
-        public string PharmacyId { get; set; }
+        public int PharmacyId { get; set; }
+
 
         [Required(ErrorMessage = "You must your first name")]
         [Display(Name = "First Name")]

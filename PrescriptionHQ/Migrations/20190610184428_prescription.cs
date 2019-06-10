@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PrescriptionHQ.Data.Migrations
+namespace PrescriptionHQ.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class prescription : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

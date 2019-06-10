@@ -39,9 +39,5 @@ namespace PrescriptionHQ.Models
         [Display(Name = "Special Instructions")]
         public string SpecialInstructions { get; set; }
       
-        public virtual ICollection<User> Users { get; set; }
-
-        public virtual ICollection<Doctor> Doctors { get; set; }
-
     }
 }

@@ -9,9 +9,7 @@ namespace PrescriptionHQ.Models
 {
     public class User: IdentityUser
     {
-        [Key]
-        public string UserId { get; set; }
-
+        
         [Required(ErrorMessage = "You must your first name")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
