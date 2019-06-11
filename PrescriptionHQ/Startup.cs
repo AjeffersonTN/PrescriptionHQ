@@ -25,7 +25,7 @@ namespace PrescriptionHQ
         {
             //adding custom roles
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var UserMaanger = serviceProvider.GetRequiredService<UserManager<User>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<User>>();
 
             string[] roleNames = { "Pharmacy", "Doctor", "Member" };
             IdentityResult roleResulter;
@@ -62,6 +62,7 @@ namespace PrescriptionHQ
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<User>()
+                .AddRoles<IdentityRole>()//added to fix exception error on build
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
