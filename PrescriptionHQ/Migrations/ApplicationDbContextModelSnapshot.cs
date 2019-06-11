@@ -77,7 +77,6 @@ namespace PrescriptionHQ.Migrations
                         .IsRequired();
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
@@ -233,8 +232,6 @@ namespace PrescriptionHQ.Migrations
                     b.Property<DateTime>("DatePrescribed")
                         .ValueGeneratedOnAddOrUpdate();
 
-                    b.Property<string>("DoctorId");
-
                     b.Property<string>("Dosage")
                         .IsRequired();
 
@@ -244,17 +241,20 @@ namespace PrescriptionHQ.Migrations
                     b.Property<string>("Frequency")
                         .IsRequired();
 
+                    b.Property<int?>("PharmacyId");
+
                     b.Property<int>("Quantity");
 
                     b.Property<int?>("RefillId");
 
                     b.Property<string>("SpecialInstructions");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("PrescriptionId");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("PharmacyId");
 
                     b.HasIndex("RefillId");
 
@@ -273,6 +273,8 @@ namespace PrescriptionHQ.Migrations
 
                     b.Property<bool>("PickupStatus");
 
+                    b.Property<int>("PrescriptionId");
+
                     b.Property<DateTime>("RequestDate")
                         .ValueGeneratedOnAddOrUpdate();
 
@@ -280,17 +282,24 @@ namespace PrescriptionHQ.Migrations
 
                     b.HasIndex("PharmacyId");
 
+                    b.HasIndex("PrescriptionId");
+
                     b.ToTable("Refill");
                 });
 
-            modelBuilder.Entity("PrescriptionHQ.Models.Doctor", b =>
+            modelBuilder.Entity("PrescriptionHQ.Models.User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<string>("City")
                         .IsRequired();
 
+                    b.Property<DateTime>("DOB");
+
                     b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("Gender")
                         .IsRequired();
 
                     b.Property<string>("LastName")
@@ -307,52 +316,13 @@ namespace PrescriptionHQ.Migrations
                     b.Property<string>("StreetAddress")
                         .IsRequired();
 
+                    b.Property<string>("UserId");
+
                     b.Property<int>("ZipCode");
 
                     b.HasIndex("PharmacyId");
 
-                    b.HasDiscriminator().HasValue("Doctor");
-                });
-
-            modelBuilder.Entity("PrescriptionHQ.Models.User", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnName("User_City");
-
-                    b.Property<string>("DoctorId");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnName("User_FirstName");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnName("User_LastName");
-
-                    b.Property<int?>("PharmacyId")
-                        .HasColumnName("User_PharmacyId");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnName("User_Phone");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnName("User_State");
-
-                    b.Property<string>("StreetAddress")
-                        .IsRequired()
-                        .HasColumnName("User_StreetAddress");
-
-                    b.Property<int>("ZipCode")
-                        .HasColumnName("User_ZipCode");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("PharmacyId");
+                    b.HasIndex("UserId");
 
                     b.HasDiscriminator().HasValue("User");
                 });
@@ -404,17 +374,18 @@ namespace PrescriptionHQ.Migrations
 
             modelBuilder.Entity("PrescriptionHQ.Models.Prescription", b =>
                 {
-                    b.HasOne("PrescriptionHQ.Models.Doctor")
+                    b.HasOne("PrescriptionHQ.Models.Pharmacy")
                         .WithMany("Prescriptions")
-                        .HasForeignKey("DoctorId");
+                        .HasForeignKey("PharmacyId");
 
                     b.HasOne("PrescriptionHQ.Models.Refill")
                         .WithMany("Prescriptions")
                         .HasForeignKey("RefillId");
 
-                    b.HasOne("PrescriptionHQ.Models.User")
+                    b.HasOne("PrescriptionHQ.Models.User", "User")
                         .WithMany("Prescriptions")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PrescriptionHQ.Models.Refill", b =>
@@ -422,24 +393,22 @@ namespace PrescriptionHQ.Migrations
                     b.HasOne("PrescriptionHQ.Models.Pharmacy")
                         .WithMany("Refills")
                         .HasForeignKey("PharmacyId");
-                });
 
-            modelBuilder.Entity("PrescriptionHQ.Models.Doctor", b =>
-                {
-                    b.HasOne("PrescriptionHQ.Models.Pharmacy")
-                        .WithMany("Doctors")
-                        .HasForeignKey("PharmacyId");
+                    b.HasOne("PrescriptionHQ.Models.Prescription", "Prescription")
+                        .WithMany()
+                        .HasForeignKey("PrescriptionId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PrescriptionHQ.Models.User", b =>
                 {
-                    b.HasOne("PrescriptionHQ.Models.Doctor")
-                        .WithMany("Users")
-                        .HasForeignKey("DoctorId");
-
                     b.HasOne("PrescriptionHQ.Models.Pharmacy")
                         .WithMany("Users")
                         .HasForeignKey("PharmacyId");
+
+                    b.HasOne("PrescriptionHQ.Models.User")
+                        .WithMany("Users")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

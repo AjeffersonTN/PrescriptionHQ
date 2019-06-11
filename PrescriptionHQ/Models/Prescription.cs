@@ -13,7 +13,7 @@ namespace PrescriptionHQ.Models
         [Key]
         public int PrescriptionId { get; set; }
 
-        [Required(ErrorMessage = "You must add a drug name.")]       
+        [Required(ErrorMessage = "You must add a drug name.")]
         public string Drug { get; set; }
 
         [Required(ErrorMessage = "You must add a dose for this medication.")]
@@ -38,6 +38,11 @@ namespace PrescriptionHQ.Models
 
         [Display(Name = "Special Instructions")]
         public string SpecialInstructions { get; set; }
-      
+
+        [Required]
+        public string UserId { get; set; }
+
+        public User User { get; set; }
+
     }
 }

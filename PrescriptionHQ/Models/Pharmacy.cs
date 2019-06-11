@@ -49,6 +49,8 @@ namespace PrescriptionHQ.Models
 
         public virtual ICollection<User> Users { get; set; }
 
-        public virtual ICollection<Doctor> Doctors { get; set; }
+        public virtual ICollection<Prescription> Prescriptions { get; set; }
+
+
     }
 }

@@ -23,6 +23,11 @@ namespace PrescriptionHQ.Models
         [Display(Name = "Status of Pickup")]
         public bool PickupStatus { get; set; }
 
+        [Required]
+        public int PrescriptionId { get; set; }
+
+        public Prescription Prescription { get; set; }
+
         public virtual ICollection<Prescription> Prescriptions { get; set; }
     }
 }

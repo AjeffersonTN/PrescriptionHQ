@@ -10,8 +10,8 @@ using PrescriptionHQ.Data;
 namespace PrescriptionHQ.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190610184428_prescription")]
-    partial class prescription
+    [Migration("20190611192036_Script")]
+    partial class Script
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,6 +75,9 @@ namespace PrescriptionHQ.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -114,6 +117,8 @@ namespace PrescriptionHQ.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -186,6 +191,144 @@ namespace PrescriptionHQ.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("PrescriptionHQ.Models.Pharmacy", b =>
+                {
+                    b.Property<int>("PharmacyId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("City")
+                        .IsRequired();
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<string>("Phone")
+                        .IsRequired();
+
+                    b.Property<string>("State")
+                        .IsRequired();
+
+                    b.Property<string>("StreetAddress")
+                        .IsRequired();
+
+                    b.Property<int>("ZipCode");
+
+                    b.HasKey("PharmacyId");
+
+                    b.ToTable("Pharmacy");
+                });
+
+            modelBuilder.Entity("PrescriptionHQ.Models.Prescription", b =>
+                {
+                    b.Property<int>("PrescriptionId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateFilled")
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<DateTime>("DatePrescribed")
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("Dosage")
+                        .IsRequired();
+
+                    b.Property<string>("Drug")
+                        .IsRequired();
+
+                    b.Property<string>("Frequency")
+                        .IsRequired();
+
+                    b.Property<int?>("PharmacyId");
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<int?>("RefillId");
+
+                    b.Property<string>("SpecialInstructions");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("PrescriptionId");
+
+                    b.HasIndex("PharmacyId");
+
+                    b.HasIndex("RefillId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Prescription");
+                });
+
+            modelBuilder.Entity("PrescriptionHQ.Models.Refill", b =>
+                {
+                    b.Property<int>("RefillId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("PharmacyId");
+
+                    b.Property<bool>("PickupStatus");
+
+                    b.Property<int>("PrescriptionId");
+
+                    b.Property<DateTime>("RequestDate")
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.HasKey("RefillId");
+
+                    b.HasIndex("PharmacyId");
+
+                    b.HasIndex("PrescriptionId");
+
+                    b.ToTable("Refill");
+                });
+
+            modelBuilder.Entity("PrescriptionHQ.Models.User", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("City")
+                        .IsRequired();
+
+                    b.Property<DateTime>("DOB");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("Gender")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<int?>("PharmacyId");
+
+                    b.Property<string>("Phone")
+                        .IsRequired();
+
+                    b.Property<string>("State")
+                        .IsRequired();
+
+                    b.Property<string>("StreetAddress")
+                        .IsRequired();
+
+                    b.Property<string>("UserId");
+
+                    b.Property<int>("ZipCode");
+
+                    b.HasIndex("PharmacyId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasDiscriminator().HasValue("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -229,6 +372,45 @@ namespace PrescriptionHQ.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PrescriptionHQ.Models.Prescription", b =>
+                {
+                    b.HasOne("PrescriptionHQ.Models.Pharmacy")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("PharmacyId");
+
+                    b.HasOne("PrescriptionHQ.Models.Refill")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("RefillId");
+
+                    b.HasOne("PrescriptionHQ.Models.User", "User")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PrescriptionHQ.Models.Refill", b =>
+                {
+                    b.HasOne("PrescriptionHQ.Models.Pharmacy")
+                        .WithMany("Refills")
+                        .HasForeignKey("PharmacyId");
+
+                    b.HasOne("PrescriptionHQ.Models.Prescription", "Prescription")
+                        .WithMany()
+                        .HasForeignKey("PrescriptionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PrescriptionHQ.Models.User", b =>
+                {
+                    b.HasOne("PrescriptionHQ.Models.Pharmacy")
+                        .WithMany("Users")
+                        .HasForeignKey("PharmacyId");
+
+                    b.HasOne("PrescriptionHQ.Models.User")
+                        .WithMany("Users")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
