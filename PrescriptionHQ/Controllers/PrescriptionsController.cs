@@ -53,7 +53,7 @@ namespace PrescriptionHQ.Controllers
         // POST: Prescriptions/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrescriptionId,Drug,Dosage,Quantity,Frequency,DateFilled,DatePrescribed,SpecialInstructions,Refills, UserId")] Prescription prescription)
+        public async Task<IActionResult> Create([Bind("PrescriptionId,Drug,Dosage,Quantity,Frequency,DatePrescribed,DateFilled,SpecialInstructions,Refills, UserId")] Prescription prescription)
         {
             if (ModelState.IsValid)
             {
@@ -79,6 +79,9 @@ namespace PrescriptionHQ.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+
             return View(prescription);
         }
 
@@ -87,7 +90,7 @@ namespace PrescriptionHQ.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PrescriptionId,Drug,Dosage,Quantity,Frequency,DateFilled,DatePrescribed,SpecialInstructions")] Prescription prescription)
+        public async Task<IActionResult> Edit(int id, [Bind("PrescriptionId,Drug,Dosage,Quantity,Frequency,DatePrescribed,DateFilled,SpecialInstructions,Refills, UserId")] Prescription prescription)
         {
             if (id != prescription.PrescriptionId)
             {
@@ -114,6 +117,7 @@ namespace PrescriptionHQ.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", prescription.UserId);
             return View(prescription);
         }
 

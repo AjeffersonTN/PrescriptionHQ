@@ -226,9 +226,10 @@ namespace PrescriptionHQ.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateFilled");
+                    b.Property<DateTime?>("DateFilled");
 
-                    b.Property<DateTime>("DatePrescribed");
+                    b.Property<DateTime?>("DatePrescribed")
+                        .IsRequired();
 
                     b.Property<string>("Dosage")
                         .IsRequired();

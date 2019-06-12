@@ -10,8 +10,8 @@ using PrescriptionHQ.Data;
 namespace PrescriptionHQ.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190612184511_Script2")]
-    partial class Script2
+    [Migration("20190612194532_Script")]
+    partial class Script
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -228,9 +228,10 @@ namespace PrescriptionHQ.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateFilled");
+                    b.Property<DateTime?>("DateFilled");
 
-                    b.Property<DateTime>("DatePrescribed");
+                    b.Property<DateTime?>("DatePrescribed")
+                        .IsRequired();
 
                     b.Property<string>("Dosage")
                         .IsRequired();
@@ -246,6 +247,8 @@ namespace PrescriptionHQ.Migrations
                     b.Property<int>("Quantity");
 
                     b.Property<int?>("RefillId");
+
+                    b.Property<int>("Refills");
 
                     b.Property<string>("SpecialInstructions");
 

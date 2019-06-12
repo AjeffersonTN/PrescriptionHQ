@@ -30,12 +30,12 @@ namespace PrescriptionHQ.Models
 
         [DataType(DataType.Date)]
         [Display(Name = "Date Filled")]
-        public DateTime DateFilled { get; set; }
+        public DateTime? DateFilled { get; set; }
 
-       
+        [Required(ErrorMessage = "You must add date medication prescribed.")]
         [DataType(DataType.Date)]        
-        [Display(Name = "Prescribed Date")]
-        public DateTime DatePrescribed { get; set; }
+        [Display(Name = "Prescribed Date")]       
+        public DateTime? DatePrescribed { get; set; }
 
         [Display(Name = "Special Instructions")]
         public string SpecialInstructions { get; set; }
