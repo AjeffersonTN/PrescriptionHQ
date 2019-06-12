@@ -46,15 +46,14 @@ namespace PrescriptionHQ.Controllers
         // GET: Prescriptions/Create
         public IActionResult Create()
         {
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
         // POST: Prescriptions/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrescriptionId,Drug,Dosage,Quantity,Frequency,DateFilled,DatePrescribed,SpecialInstructions")] Prescription prescription)
+        public async Task<IActionResult> Create([Bind("PrescriptionId,Drug,Dosage,Quantity,Frequency,DateFilled,DatePrescribed,SpecialInstructions,Refills, UserId")] Prescription prescription)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +61,8 @@ namespace PrescriptionHQ.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", prescription.UserId);
             return View(prescription);
         }
 

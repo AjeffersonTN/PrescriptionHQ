@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PrescriptionHQ.Data;
 
 namespace PrescriptionHQ.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190612184511_Script2")]
+    partial class Script2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,8 +246,6 @@ namespace PrescriptionHQ.Migrations
                     b.Property<int>("Quantity");
 
                     b.Property<int?>("RefillId");
-
-                    b.Property<int>("Refills");
 
                     b.Property<string>("SpecialInstructions");
 

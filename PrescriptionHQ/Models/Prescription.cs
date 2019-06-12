@@ -25,14 +25,15 @@ namespace PrescriptionHQ.Models
         [Required(ErrorMessage = "You must add a frequency for this medication.")]
         public string Frequency { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "You must add a number for refills.")]
+        public int Refills { get; set; }
+
         [DataType(DataType.Date)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [Display(Name = "Date Filled")]
         public DateTime DateFilled { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+       
+        [DataType(DataType.Date)]        
         [Display(Name = "Prescribed Date")]
         public DateTime DatePrescribed { get; set; }
 
@@ -42,6 +43,7 @@ namespace PrescriptionHQ.Models
         [Required]
         public string UserId { get; set; }
 
+        
         public User User { get; set; }
 
     }

@@ -29,6 +29,15 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
+                        <li>
+                            @using (Html.BeginForm("Search", "Action NEED TO FIX", FormMethod.Get))
+                            {
+                                @Html.TextBox("Find", "GoodRx Drug Search", new { @class = "form-control" })
+                                <div>
+                                    <input type="submit" value="Find" />
+                                </div>
+                            }
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -48,15 +57,6 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Requests</a>
                         </li>
                         <br />
-                        <li>
-                            @using (Html.BeginForm("Search", "Action NEED TO FIX", FormMethod.Get))
-                            {
-                                @Html.TextBox("Find", "GoodRx Drug Search", new { @class = "form-control" })
-                                <div>
-                                    <input type="submit" value="Find" />
-                                </div>
-                            }
-                        </li>
                     </ul>
                 </div>
             </div>
