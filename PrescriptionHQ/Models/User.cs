@@ -38,7 +38,7 @@ namespace PrescriptionHQ.Models
         public int ZipCode { get; set; }
 
 
-        [Required(ErrorMessage = "You must provide a valid birthdate.")]
+        [Required(ErrorMessage = "You must provide a valid birthdate.")] 
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         [DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]
