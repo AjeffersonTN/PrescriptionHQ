@@ -58,23 +58,13 @@ namespace PrescriptionHQ.Controllers
             return View();
         }
 
-        //Get: Prescriptions for the member view
+        //Get: Prescriptions for the member view 
         
         [Authorize]
         public async Task<IActionResult> GetActivePrescriptions()
         {
 
-            var user = await GetCurrentUserAsync();
-            //var applicationDbContext = _context.Prescription
-                    //.Include(p => p.Drug)
-                    //.Include(p => p.Dosage)
-                    //.Include(p => p.Quantity)
-                    //.Include(p => p.Frequency)
-                    //.Include(p => p.Refills)
-                    //.Include(p => p.DateFilled)
-                    //.Include(p => p.DatePrescribed)
-                    //.Include(p => p.SpecialInstructions)
-                    //.Where(p => p.UserId == user.Id);
+            var user = await GetCurrentUserAsync();      
 
             return View(await _context.Prescription.Where(p => p.UserId == user.Id).ToListAsync());
             //return View(await applicationDbContext.ToListAsync());
