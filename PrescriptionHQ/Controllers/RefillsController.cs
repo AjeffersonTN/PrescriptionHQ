@@ -56,6 +56,7 @@ namespace PrescriptionHQ.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RefillId,RequestDate,PickupStatus")] Refill refill)
         {
+            //create a new prescription based off the information selected. send that object to the refills list and display message stating refill has ben sent
             if (ModelState.IsValid)
             {
                 _context.Add(refill);
@@ -86,9 +87,9 @@ namespace PrescriptionHQ.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RefillId,RequestDate,PickupStatus")] Refill refill)
+        public async Task<IActionResult> Edit(int id, [Bind("PrescriptionId,Drug,Dosage,Quantity,Frequency,DatePrescribed,DateFilled,SpecialInstructions,Refills, UserId")] Prescription prescription)
         {
-            if (id != refill.RefillId)
+            if (id != prescription.PrescriptionId)
             {
                 return NotFound();
             }
@@ -97,12 +98,12 @@ namespace PrescriptionHQ.Controllers
             {
                 try
                 {
-                    _context.Update(refill);
+                    _context.Update(prescription);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RefillExists(refill.RefillId))
+                    if (!RefillExists(prescription.PrescriptionId))
                     {
                         return NotFound();
                     }
@@ -113,7 +114,7 @@ namespace PrescriptionHQ.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(refill);
+            return View(prescription);
         }
 
         // GET: Refills/Delete/5
