@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<PrescriptionHQ.Models.Prescription>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Indx";
 }
 
-<h1>Index</h1>
+<h1>Active Prescriptions</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                @Html.DisplayNameFor(model => model.UserId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Drug)
@@ -46,7 +46,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.User)
+                @Html.DisplayFor(modelItem => item.UserId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Drug)
@@ -73,9 +73,11 @@
                 @Html.DisplayFor(modelItem => item.SpecialInstructions)
             </td>
             <td>
+                <a href="/Refills/Create">Refill</a> |
                 <a asp-action="Edit" asp-route-id="@item.PrescriptionId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.PrescriptionId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.PrescriptionId">Delete</a>
+
             </td>
         </tr>
 }

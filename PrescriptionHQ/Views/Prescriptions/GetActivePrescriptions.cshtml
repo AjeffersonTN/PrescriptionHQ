@@ -1,0 +1,77 @@
+﻿@model IEnumerable<PrescriptionHQ.Models.Prescription>
+
+@{
+    ViewData["Title"] = "GetActivePrescriptions";
+}
+
+<h1>Active Prescriptions</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th>
+               Drug
+            </th>
+            <th>
+               Dosage
+            </th>
+            <th>
+               Quantity
+            </th>
+            <th>
+                Frequency
+            </th>
+            <th>
+               DateFilled
+            </th>
+            <th>
+               DatePrescribed
+            </th>
+            <th>
+               Refills
+            </th>
+            <th>
+               SpecialInstructions
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+              
+                <td>
+                    @Html.DisplayFor(modelItem => item.Drug)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dosage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Frequency)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateFilled)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DatePrescribed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Refills)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpecialInstructions)
+                </td>
+                <td>
+                    <a href="/Refills/Create">Refill</a> 
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
