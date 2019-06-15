@@ -84,8 +84,11 @@ namespace PrescriptionHQ.Controllers
         [Authorize]
         public async Task<IActionResult> PharmacyVault()
         {
-         
-            return View(await _context.Prescription.Include(p => p.User).ToListAsync());
+            var customerList = _context.Prescription
+                .Include(p => p.User)                
+                .Where(p => p.UserId != null);
+
+            return View(await customerList.ToListAsync());
 
         }
 

@@ -17,16 +17,11 @@
                 Address
             </th>
             <th>
-                City
+                City, State
             </th>
+          
             <th>
-                State
-            </th>
-            <th>
-                Zip Code
-            </th>
-            <th>
-                Phone
+               Phone
             </th>
             <th>
                 Email
@@ -38,7 +33,7 @@
                 Gender
             </th>
             <th>
-                Drug
+                Medications
             </th>
 
 
@@ -57,16 +52,11 @@
                 @Html.DisplayFor(modelItem => item.User.StreetAddress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.City)
+                @Html.DisplayFor(modelItem => item.User.City), @Html.DisplayFor(modelItem => item.User.State)   @Html.DisplayFor(modelItem => item.User.ZipCode)
             </td>
+          
             <td>
-                @Html.DisplayFor(modelItem => item.User.State)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.ZipCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.PhoneNumber)
+                @Html.DisplayFor(modelItem => item.User.Phone)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.User.Email)
@@ -81,7 +71,7 @@
                 @Html.DisplayFor(modelItem => item.Drug)
             </td>
             <td>
-                <a href="/User/Details">Details</a>
+                <a href="/Prescription/Details">Details</a>
 
             </td>
         </tr>
