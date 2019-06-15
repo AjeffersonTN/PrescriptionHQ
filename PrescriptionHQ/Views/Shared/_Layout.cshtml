@@ -43,22 +43,25 @@
                                 if (User.IsInRole("Pharmacy"))
                                 {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Pharmacy Vault</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="PharmacyVault">Pharmacy Vault</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Requests</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="PharmacyRequest">Requests</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="Create">Prescribe</a>
                                 </li>
                             }
                         }
-                            @if (User.Identity.IsAuthenticated)
+                            @if (User.Identity.IsAuthenticated) 
                             {
                                 if (User.IsInRole("Doctor"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="Create">Doctor's Corner</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="CreateRequest">Doctor's Corner</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="GetActivePrescriptions">Prescribed</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="Index">Prescribed</a>
                                     </li>
 
                                 }

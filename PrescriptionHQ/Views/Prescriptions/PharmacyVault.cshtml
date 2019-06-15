@@ -1,0 +1,91 @@
+﻿@model IEnumerable<PrescriptionHQ.Models.Prescription>
+
+@{
+    ViewData["Title"] = "PharmacyVault";
+}
+
+<h1>Patient Details</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+
+            <th>
+                Address
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+                State
+            </th>
+            <th>
+                Zip Code
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Date of Birth
+            </th>
+            <th>
+                Gender
+            </th>
+            <th>
+                Drug
+            </th>
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FirstName)  @Html.DisplayFor(modelItem => item.User.LastName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.User.StreetAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.ZipCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Drug)
+            </td>
+            <td>
+                <a href="/User/Details">Details</a>
+
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

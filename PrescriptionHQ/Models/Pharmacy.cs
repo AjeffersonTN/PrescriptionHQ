@@ -41,10 +41,6 @@ namespace PrescriptionHQ.Models
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 
-        //[Required(ErrorMessage = "You must provide a valid email.")]
-        //[DataType(DataType.EmailAddress)]
-        //public string Email { get; set; }
-
         public virtual ICollection<Refill> Refills { get; set; }
 
         public virtual ICollection<User> Users { get; set; }

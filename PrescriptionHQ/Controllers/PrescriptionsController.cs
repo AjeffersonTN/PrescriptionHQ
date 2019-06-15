@@ -32,6 +32,14 @@ namespace PrescriptionHQ.Controllers
         {
             return View(await _context.Prescription.ToListAsync());
         }
+
+        // GET: Prescriptions
+        [Authorize(Roles = "Pharmacy")]
+        public async Task<IActionResult> PharmacyRequest()
+        {
+            //var user = await GetCurrentUserAsync();
+            return View(await _context.Prescription.ToListAsync());
+        }
         [Authorize(Roles = "Pharmacy,Doctor,Member")]
         // GET: Prescriptions/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -67,7 +75,18 @@ namespace PrescriptionHQ.Controllers
             var user = await GetCurrentUserAsync();      
 
             return View(await _context.Prescription.Where(p => p.UserId == user.Id).ToListAsync());
-            //return View(await applicationDbContext.ToListAsync());
+           
+        }
+
+
+        //Get: Pharmacy vault get customer list and prescriptions 
+
+        [Authorize]
+        public async Task<IActionResult> PharmacyVault()
+        {
+         
+            return View(await _context.Prescription.Include(p => p.User).ToListAsync());
+
         }
 
 
@@ -106,6 +125,28 @@ namespace PrescriptionHQ.Controllers
             return View(prescription);
         }
 
+        // GET: Prescriptions/Create
+        [Authorize(Roles = "Doctor")]
+        public IActionResult CreateRequest()
+        {
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateRequest([Bind("PrescriptionId,Drug,Dosage,Quantity,Frequency,DatePrescribed,DateFilled,SpecialInstructions,Refills,UserId,RoleId")] Prescription prescription)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(prescription);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", prescription.User);
+            return View(prescription);
+        }
+
         // POST: Prescriptions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -136,7 +177,7 @@ namespace PrescriptionHQ.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(PharmacyRequest));
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", prescription.UserId);
             return View(prescription);

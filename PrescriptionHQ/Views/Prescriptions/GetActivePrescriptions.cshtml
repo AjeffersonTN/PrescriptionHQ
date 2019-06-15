@@ -9,30 +9,30 @@
 <table class="table">
     <thead>
         <tr>
-            
             <th>
-               Drug
+                User
+            </th>
+
+            <th>
+                Drug
             </th>
             <th>
-               Dosage
+                Dosage
             </th>
             <th>
-               Quantity
+                Quantity
             </th>
             <th>
                 Frequency
             </th>
             <th>
-               DateFilled
+                Date Prescribed
             </th>
             <th>
-               DatePrescribed
+                Refills
             </th>
             <th>
-               Refills
-            </th>
-            <th>
-               SpecialInstructions
+                Special Instructions
             </th>
             <th></th>
         </tr>
@@ -40,37 +40,40 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-              
-                <td>
-                    @Html.DisplayFor(modelItem => item.Drug)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Dosage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Frequency)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateFilled)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DatePrescribed)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Refills)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SpecialInstructions)
-                </td>
-                <td>
-                    <a href="/Refills/Edit">Refill</a> 
-                    
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Drug)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dosage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Frequency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateFilled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatePrescribed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Refills)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecialInstructions)
+            </td>
+            <td>
+                <a href="/Refills/Edit">Refill</a>
+
+            </td>
+        </tr>
         }
     </tbody>
 </table>
