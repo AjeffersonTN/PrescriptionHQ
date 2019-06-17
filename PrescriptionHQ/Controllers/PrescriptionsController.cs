@@ -39,7 +39,7 @@ namespace PrescriptionHQ.Controllers
         }
 
         // GET: Prescriptions
-        [Authorize(Roles = "Pharmacy")]
+        [Authorize(Roles = "Pharmacy,Doctor")]
         public async Task<IActionResult> PharmacyRequest()
         {
             var customerList = _context.Prescription
@@ -74,7 +74,7 @@ namespace PrescriptionHQ.Controllers
         // GET: Prescriptions/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullName");
 
             return View();
         }
@@ -117,7 +117,7 @@ namespace PrescriptionHQ.Controllers
                 return RedirectToAction(nameof(Index));
             }
             
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", prescription.UserId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullName", prescription.UserId);
             return View(prescription);
         }
         [Authorize(Roles = "Pharmacy,Doctor")]
@@ -135,16 +135,16 @@ namespace PrescriptionHQ.Controllers
                 return NotFound();
             }
 
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName", "LastName");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullName");
 
             return View(prescription);
         }
 
         // GET: Prescriptions/Create
-        [Authorize(Roles = "Doctor")]
+        [Authorize(Roles = "Pharmacy,Doctor")]
         public IActionResult CreateRequest()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName", "LastName");
+            ViewData["PatientName"] = new SelectList(_context.Users, "FullName", "FullName");
             return View();
         }
         [HttpPost]

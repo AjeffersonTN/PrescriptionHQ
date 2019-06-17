@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Identity;
 
 namespace PrescriptionHQ.Models
 {
-    public class User: IdentityUser
+    public class User : IdentityUser
     {
-        public User ()
+        public User()
         {
 
         }
-        
+
         [Required(ErrorMessage = "You must your first name")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
@@ -21,6 +21,14 @@ namespace PrescriptionHQ.Models
         [Required(ErrorMessage = "You must your last name.")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [Display(Name = "Full Name")]
+        public string FullName {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+    }
 
         [Required(ErrorMessage = "You must provide a street address.")]
         [Display(Name = "Address")]
