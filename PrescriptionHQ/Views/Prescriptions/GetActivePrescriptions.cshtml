@@ -70,7 +70,8 @@
                 @Html.DisplayFor(modelItem => item.SpecialInstructions)
             </td>
             <td>
-                <a href="/Refills/Edit">Refill</a>
+                <a asp--area="" asp-controller="Home" asp-action="Privacy" asp-route-patientName="@item.PatientName" asp-route-patientEmail="@item.User.Email" onclick="return alert('Your request was sent to the pharmacy. You will be notified when your prescription is ready for pickup.');">Refill</a>
+
 
             </td>
         </tr>

@@ -46,7 +46,6 @@ namespace PrescriptionHQ.Controllers
                .Include(p => p.User)
                .Where(p => p.UserId != null);
 
-            //ViewBag.Message = "Your email has been sent.";
             return View(await customerList.ToListAsync());
         }
         [Authorize(Roles = "Pharmacy,Doctor,Member")]
@@ -62,8 +61,6 @@ namespace PrescriptionHQ.Controllers
              .Where(p => p.UserId != null)
              .FirstOrDefaultAsync(m => m.PrescriptionId == id);
 
-            //var prescription = await _context.Prescription
-            //    .FirstOrDefaultAsync(m => m.PrescriptionId == id);
             if (prescription == null)
             {
                 return NotFound();
