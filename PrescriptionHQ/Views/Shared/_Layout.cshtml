@@ -53,7 +53,7 @@
                                 </li>
                             }
                         }
-                            @if (User.Identity.IsAuthenticated) 
+                            @if (User.Identity.IsAuthenticated)
                             {
                                 if (User.IsInRole("Doctor"))
                                 {
@@ -77,54 +77,63 @@
                                 }
                             }
                         </ul>
-                            <br />
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            <div>
-                @using (Html.BeginForm("Search", "Action NEED TO FIX", FormMethod.Get))
-                {
-                    @Html.TextBox("Find", "GoodRx Drug Search", new { @class = "form-control" })
-                    <div>
-                        <input type="submit" value="Find" />
+                        <br />
                     </div>
-                }
-            </div>
-            @RenderBody()
-        </main>
-    </div>
+                </div>
+            </nav>
+        </header>
 
-    <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - PrescriptionHQ - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <partial name="_CookieConsentPartial" />
+            <main role="main" class="pb-3">
+                <div>
+                    @using (Html.BeginForm("Search", "Action NEED TO FIX", FormMethod.Get))
+                    {
+                        @Html.TextBox("Find", "GoodRx Drug Search", new { @class = "form-control" })
+                        <div>
+                            <input type="submit" value="Find" />
+                        </div>
+                    }
+                </div>
+                @RenderBody()
+            </main>
         </div>
-    </footer>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
-        </script>
-    </environment>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2019 - PrescriptionHQ - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
 
-    @RenderSection("Scripts", required: false)
-</body>
+        <environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+            </script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+            </script>
+        </environment>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+        @RenderSection("Scripts", required: false)
+        @if (ViewBag.Message != null)
+        {
+            <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+            </script>
+        }
+    </body>
 </html>
