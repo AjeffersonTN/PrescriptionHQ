@@ -30,15 +30,23 @@ namespace PrescriptionHQ.Controllers
         // GET: Prescriptions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Prescription.ToListAsync());
+            var customerList = _context.Prescription
+              .Include(p => p.User)
+              .Where(p => p.UserId != null);
+
+            return View(await customerList.ToListAsync());
+            //return View(await _context.Prescription.ToListAsync());
         }
 
         // GET: Prescriptions
         [Authorize(Roles = "Pharmacy")]
         public async Task<IActionResult> PharmacyRequest()
         {
-            //var user = await GetCurrentUserAsync();
-            return View(await _context.Prescription.ToListAsync());
+            var customerList = _context.Prescription
+               .Include(p => p.User)
+               .Where(p => p.UserId != null);
+
+            return View(await customerList.ToListAsync());
         }
         [Authorize(Roles = "Pharmacy,Doctor,Member")]
         // GET: Prescriptions/Details/5
@@ -48,9 +56,13 @@ namespace PrescriptionHQ.Controllers
             {
                 return NotFound();
             }
-
             var prescription = await _context.Prescription
-                .FirstOrDefaultAsync(m => m.PrescriptionId == id);
+             .Include(p => p.User)
+             .Where(p => p.UserId != null)
+             .FirstOrDefaultAsync(m => m.PrescriptionId == id);
+
+            //var prescription = await _context.Prescription
+            //    .FirstOrDefaultAsync(m => m.PrescriptionId == id);
             if (prescription == null)
             {
                 return NotFound();
@@ -63,6 +75,7 @@ namespace PrescriptionHQ.Controllers
         public IActionResult Create()
         {
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+
             return View();
         }
 
@@ -80,7 +93,6 @@ namespace PrescriptionHQ.Controllers
 
 
         //Get: Pharmacy vault get customer list and prescriptions 
-
         [Authorize]
         public async Task<IActionResult> PharmacyVault()
         {
@@ -123,7 +135,7 @@ namespace PrescriptionHQ.Controllers
                 return NotFound();
             }
 
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName", "LastName");
 
             return View(prescription);
         }
@@ -132,7 +144,7 @@ namespace PrescriptionHQ.Controllers
         [Authorize(Roles = "Doctor")]
         public IActionResult CreateRequest()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName", "LastName");
             return View();
         }
         [HttpPost]

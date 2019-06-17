@@ -9,11 +9,11 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            @*<th>
                Doctor
-            </th>
+            </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.UserId)
+                Patient Name
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Drug)
@@ -21,24 +21,24 @@
             <th>
                 @Html.DisplayNameFor(model => model.Dosage)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
+            </th>*@
+            @*<th>
                 @Html.DisplayNameFor(model => model.Frequency)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.DateFilled)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DatePrescribed)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Refills)
-            </th>
-            <th>
+            </th>*@
+            @*<th>
                 @Html.DisplayNameFor(model => model.SpecialInstructions)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -46,11 +46,11 @@
         @foreach (var item in Model)
         {
         <tr>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.UserId)
-            </td>
+            </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.UserId)
+                @Html.DisplayFor(modelItem => item.User.FirstName)  @Html.DisplayFor(modelItem => item.User.LastName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Drug)
@@ -58,27 +58,27 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Dosage)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
+            </td>*@
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Frequency)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.DateFilled)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DatePrescribed)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Refills)
-            </td>
-            <td>
+            </td>*@
+            @*<td>
                 @Html.DisplayFor(modelItem => item.SpecialInstructions)
-            </td>
+            </td>*@
             <td>
-                <a href="/Refills/Create">Refill</a> 
-                <a asp-action="Edit" asp-route-id="@item.PrescriptionId">Edit</a> 
+                
+                <a asp-action="Edit" asp-route-id="@item.PrescriptionId">Fill Prescription</a> |
                 <a asp-action="Details" asp-route-id="@item.PrescriptionId">Details</a> 
 
 

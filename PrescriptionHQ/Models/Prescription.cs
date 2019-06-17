@@ -40,6 +40,7 @@ namespace PrescriptionHQ.Models
         [Display(Name = "Special Instructions")]
         public string SpecialInstructions { get; set; }
 
+        
         [Required]
         public string UserId { get; set; }
 
