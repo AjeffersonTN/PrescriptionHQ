@@ -16,7 +16,7 @@ namespace PrescriptionHQ.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
-        private readonly object p;
+        
 
         public PrescriptionsController(ApplicationDbContext context, UserManager<User> userManager)
         {
@@ -46,6 +46,7 @@ namespace PrescriptionHQ.Controllers
                .Include(p => p.User)
                .Where(p => p.UserId != null);
 
+            //ViewBag.Message = "Your email has been sent.";
             return View(await customerList.ToListAsync());
         }
         [Authorize(Roles = "Pharmacy,Doctor,Member")]

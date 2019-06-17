@@ -27,38 +27,38 @@ namespace PrescriptionHQ.Controllers
         public IActionResult Contact(string patientName, string patientEmail)
             
         {
-            ViewData["Message"] = "Contact";
-            //Instantiate Mimemessage
-            var message = new MimeMessage();
-            //From address
-            message.From.Add(new MailboxAddress("Natural Pharmacy", "akjeff025@gmail.com"));
-            //To address
-            message.To.Add(new MailboxAddress(patientName, patientEmail));
-            //Subject
-            message.Subject = "Prescription Update.";
-            message.Body = new TextPart("plain")
-            {
-                Text = "Your prescription is availble for pickup."
-            };
 
-            //Configure and send email
-            using (var client = new SmtpClient())
-            {
-                client.Connect("smtp.gmail.com", 465, SecureSocketOptions.SslOnConnect);
+                ViewBag.Message = "Your email has been sent.";
 
-                client.Authenticate("akjeff025@gmail.com", "JEnesis1208");
+                ViewData["Message"] = "Contact";
+                //Instantiate Mimemessage
+                var message = new MimeMessage();
+                //From address
+                message.From.Add(new MailboxAddress("Natural Pharmacy", "akjeff025@gmail.com"));
+                //To address
+                message.To.Add(new MailboxAddress(patientName, patientEmail));
+                //Subject
+                message.Subject = "Prescription Update.";
+                message.Body = new TextPart("plain")
+                {
+                    Text = "Your prescription is availble for pickup."
+                };
 
-                client.Send(message);
+                //Configure and send email
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 465, SecureSocketOptions.SslOnConnect);
 
-                client.Disconnect(true);
-                
-            }
-            if(2 == 2)
-            {
-            ViewBag.Message = "Your email has been sent.";
+                    client.Authenticate("akjeff025@gmail.com", "JEnesis1208");
+
+                    client.Send(message);
+
+                    client.Disconnect(true);
+
+                }
+            //ViewBag.Message = "Your email has been sent.";
 
             return RedirectToAction("PharmacyRequest", "Prescriptions");
-            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

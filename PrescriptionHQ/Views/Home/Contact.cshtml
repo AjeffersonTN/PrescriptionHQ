@@ -40,15 +40,9 @@
         </div>
 
     </form>
-    @if (ViewBag.Message != null) {
-        <script type="text/javascript">
 
-            window.onload = function () {
-                alert("@ViewBag.Message");
-            };
-
-        </script>
-
-    }
 </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 
