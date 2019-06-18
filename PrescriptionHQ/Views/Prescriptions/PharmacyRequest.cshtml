@@ -7,11 +7,13 @@
 <h1>Prescription Request</h1>
 
 <table class="table">
+    <tr>
+        
     <thead>
         <tr>
-           
+
             <th>
-                Patient Name
+                @Html.ActionLink("Patient Name", "PharmacyRequest", new { sortOrder = ViewBag.NameSortParm })
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Drug)
@@ -27,7 +29,7 @@
                 @Html.DisplayNameFor(model => model.DatePrescribed)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RefillRequested)
+                @Html.ActionLink("Refill Requested", "PharmacyRequest", new { sortOrder = ViewBag.RefillSortParm })
             </th>
             <th></th>
         </tr>
@@ -35,36 +37,36 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
+            <tr>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.User.FirstName)  @Html.DisplayFor(modelItem => item.User.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Drug)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dosage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateFilled)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DatePrescribed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RefillRequested)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.FirstName)  @Html.DisplayFor(modelItem => item.User.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Drug)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dosage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateFilled)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DatePrescribed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RefillRequested)
+                </td>
 
-            <td>
+                <td>
 
-                <a asp-action="Details" asp-route-id="@item.PrescriptionId">Details</a> |
-                <a asp-action="Edit" asp-route-id="@item.PrescriptionId">Fill </a> |
-                <a asp--area="" asp-controller="Home" asp-action="Contact" asp-route-patientName="@item.PatientName" asp-route-patientEmail="@item.User.Email" onclick="return alert('Your email has been sent');">Notify Patient</a>
+                    <a asp-action="Details" asp-route-id="@item.PrescriptionId">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.PrescriptionId">Fill </a> |
+                    <a asp--area="" asp-controller="Home" asp-action="Contact" asp-route-patientName="@item.PatientName" asp-route-patientEmail="@item.User.Email" onclick="return alert('Your email has been sent');">Notify Patient</a>
 
-            </td>
+                </td>
 
-        </tr>
+            </tr>
         }
     </tbody>
 </table>

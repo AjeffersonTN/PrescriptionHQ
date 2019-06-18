@@ -38,16 +38,31 @@ namespace PrescriptionHQ.Controllers
             //return View(await _context.Prescription.ToListAsync());
         }
 
-
+        //Added Sort
         // GET: Prescriptions
         [Authorize(Roles = "Pharmacy,Doctor")]
-        public async Task<IActionResult> PharmacyRequest()
+        public async Task<IActionResult> PharmacyRequest(string sortOrder)
         {
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";            
+            ViewBag.RefillSortParm = String.IsNullOrEmpty(sortOrder) ? "refill_desc" : "";
+
             var customerList = _context.Prescription
                .Include(p => p.User)
                .Where(p => p.UserId != null);
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    customerList = customerList.OrderByDescending(c => c.User.FullName);
+                    break;
+            
 
-            return View(await customerList.ToListAsync());
+                case "refill_desc":
+                   customerList = customerList.OrderByDescending(c => c.RefillRequested);
+                   break;
+            }
+
+
+            return View(await customerList.OrderBy(c => c.DateFilled).ToListAsync());
         }
         [Authorize(Roles = "Pharmacy,Doctor,Member")]
         // GET: Prescriptions/Details/5
