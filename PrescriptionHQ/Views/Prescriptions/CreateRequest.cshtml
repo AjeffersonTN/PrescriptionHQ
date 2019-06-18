@@ -4,7 +4,7 @@
     ViewData["Title"] = "CreateRequest";
 }
 
-<h1>CreateRequest</h1>
+<h1>Create Request</h1>
 
 <h4>Prescription</h4>
 <hr />
@@ -12,7 +12,10 @@
     <div class="col-md-4">
         <form asp-action="CreateRequest">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            <div class="form-group">
+                <label asp-for="PatientName" class="control-label">Patient Name</label>
+                <select asp-for="PatientName" class="form-control" asp-items="ViewBag.PatientName"></select>
+            </div>
             <div class="form-group">
                 <label asp-for="Drug" class="control-label"></label>
                 <input asp-for="Drug" class="form-control" />
@@ -53,10 +56,7 @@
                 <input asp-for="SpecialInstructions" class="form-control" />
                 <span asp-validation-for="SpecialInstructions" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="PatientName" class="control-label">Patient Name</label>
-                <select asp-for="PatientName" class="form-control" asp-items="ViewBag.PatientName"></select>
-            </div>
+
             <div class="form-group">
                 <input type="hidden" asp-for="UserId" value="85aa0957-f359-4eb8-b859-518d40fca265" />
             </div>

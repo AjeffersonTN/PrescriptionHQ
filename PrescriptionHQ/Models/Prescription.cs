@@ -43,6 +43,9 @@ namespace PrescriptionHQ.Models
         [Display(Name = "Patient Name")]
         public string PatientName { get; set; }
 
+        [Display(Name = "Refill Requested")]
+        public string RefillRequested { get; set; }
+
 
         [Required]
         public string UserId { get; set; }

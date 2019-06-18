@@ -26,6 +26,9 @@
                 Frequency
             </th>
             <th>
+                Date Filled
+            </th>
+            <th>
                 Date Prescribed
             </th>
             <th>
@@ -33,6 +36,9 @@
             </th>
             <th>
                 Special Instructions
+            </th>
+            <th>
+                Refill Request
             </th>
             <th></th>
         </tr>
@@ -70,7 +76,12 @@
                 @Html.DisplayFor(modelItem => item.SpecialInstructions)
             </td>
             <td>
-                <a asp--area="" asp-controller="Home" asp-action="Privacy" asp-route-patientName="@item.PatientName" asp-route-patientEmail="@item.User.Email" onclick="return alert('Your request was sent to the pharmacy. You will be notified when your prescription is ready for pickup.');">Refill</a>
+                @Html.DisplayFor(modelItem => item.RefillRequested)
+            </td>
+       
+
+            <td>
+                <a asp--area="" asp-controller="Prescriptions" asp-action="RefillStatus" asp-route-id="@item.PrescriptionId" >Refill</a>
 
 
             </td>
