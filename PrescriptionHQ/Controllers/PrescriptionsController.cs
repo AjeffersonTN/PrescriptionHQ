@@ -41,7 +41,7 @@ namespace PrescriptionHQ.Controllers
         //Added Sort
         // GET: Prescriptions
         [Authorize(Roles = "Pharmacy,Doctor")]
-        public async Task<IActionResult> PharmacyRequest(string sortOrder)
+        public async Task<IActionResult> PharmacyRequest(string sortOrder, string searchString)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";            
             ViewBag.RefillSortParm = String.IsNullOrEmpty(sortOrder) ? "refill_desc" : "";
@@ -49,6 +49,13 @@ namespace PrescriptionHQ.Controllers
             var customerList = _context.Prescription
                .Include(p => p.User)
                .Where(p => p.UserId != null);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                customerList = customerList.Where(c => c.User.FullName.Contains(searchString));
+                                 
+            }
+
             switch (sortOrder)
             {
                 case "name_desc":

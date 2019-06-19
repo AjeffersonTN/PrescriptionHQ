@@ -6,9 +6,16 @@
 
 <h1>Prescription Request</h1>
 
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
 <table class="table">
     <tr>
-        
+
     <thead>
         <tr>
 
