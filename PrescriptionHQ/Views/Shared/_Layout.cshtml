@@ -86,16 +86,13 @@
         <div class="container">
             <partial name="_CookieConsentPartial" />
             <main role="main" class="pb-3">
-                <div>
-                    @using (Html.BeginForm("Search", "Action NEED TO FIX", FormMethod.Get))
-                    {
-                        @Html.TextBox("Find", "GoodRx Drug Search", new { @class = "form-control" })
-                        <div>
-                            <input type="submit" value="Find" />
-                        </div>
-                    }
-                </div>
-                @RenderBody()
+                <p id='ddc-widget-search' data-version='20140401'>Medication search by Drugs.com</p>
+                <script src='https://www.drugs.com/widget/ddc-widget.js?v=4'></script>
+                <script>
+                    var ddcw_search_theme = 'ddc';
+                </script>
+
+        @RenderBody()
             </main>
         </div>
 
