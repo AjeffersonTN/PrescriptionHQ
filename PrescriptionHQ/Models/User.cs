@@ -55,7 +55,10 @@ namespace PrescriptionHQ.Models
         [Required(ErrorMessage = "You must provide your gender.")]
         public string Gender { get; set; }
 
-        [Required(ErrorMessage = "You must provide a phone number.")]
+        [Required(ErrorMessage = "You must provide your allergies.")]
+        public string Allgeries { get; set; }
+
+            [Required(ErrorMessage = "You must provide a phone number.")]
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 

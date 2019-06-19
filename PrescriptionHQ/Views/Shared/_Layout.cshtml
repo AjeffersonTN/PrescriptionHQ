@@ -43,7 +43,7 @@
                                 if (User.IsInRole("Pharmacy"))
                                 {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="PharmacyVault">Pharmacy Vault</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="PharmacyVault">Patient Details</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="PharmacyRequest">Requests</a>
@@ -59,6 +59,9 @@
                                 {
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="CreateRequest">Doctor's Corner</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="PharmacyVault">Patient Details</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="Index">Prescribed</a>
@@ -91,6 +94,7 @@
                 <script>
                     var ddcw_search_theme = 'ddc';
                 </script>
+
 
         @RenderBody()
             </main>
