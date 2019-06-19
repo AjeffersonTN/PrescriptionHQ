@@ -28,14 +28,22 @@ namespace PrescriptionHQ.Controllers
         [Authorize(Roles = "Pharmacy,Doctor")]
         
         // GET: Prescriptions
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
+            
             var customerList = _context.Prescription
               .Include(p => p.User)
               .Where(p => p.UserId != null);
 
-            return View(await customerList.ToListAsync());
-            //return View(await _context.Prescription.ToListAsync());
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                customerList = customerList.Where(c => c.User.FullName.Contains(searchString));
+
+            }
+
+            return View(await customerList.OrderBy(c => c.User.FullName).ToListAsync());
+
         }
 
         //Added Sort
@@ -91,15 +99,7 @@ namespace PrescriptionHQ.Controllers
 
             return View(prescription);
         }
-        [Authorize(Roles = "Pharmacy,Doctor")]
-        // GET: Prescriptions/Create
-        public IActionResult Create()
-        {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullName");
-
-            return View();
-        }
-
+      
         //Get: Prescriptions for the member view 
         
         [Authorize]
@@ -122,10 +122,19 @@ namespace PrescriptionHQ.Controllers
                 .Include(p => p.User)                
                 .Where(p => p.UserId != null);
 
-            return View(await customerList.ToListAsync());
+
+            return View(await customerList.Distinct().ToListAsync());
 
         }
 
+        [Authorize(Roles = "Pharmacy,Doctor")]
+        // GET: Prescriptions/Create
+        public IActionResult Create()
+        {
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullName");
+
+            return View();
+        }
 
         // POST: Prescriptions/Create
         [HttpPost]
@@ -136,7 +145,7 @@ namespace PrescriptionHQ.Controllers
             {
                 _context.Add(prescription);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(PharmacyRequest));
             }
             
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullName", prescription.UserId);
@@ -309,5 +318,62 @@ namespace PrescriptionHQ.Controllers
         {
             return _context.Prescription.Any(e => e.PrescriptionId == id);
         }
+
+        //[Authorize(Roles = "Pharmacy,Doctor")]
+        // GET: Prescriptions/Edit/5
+        public async Task<IActionResult> DoctorEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var prescription = await _context.Prescription.FindAsync(id);
+            if (prescription == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullName");
+
+            return View(prescription);
+        }
+
+        // POST: Prescriptions/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DoctorEdit(int id, [Bind("PrescriptionId,Drug,Dosage,Quantity,Frequency,DatePrescribed,DateFilled,SpecialInstructions,Refills,UserId,PatientName")] Prescription prescription)
+        {
+            if (id != prescription.PrescriptionId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(prescription);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PrescriptionExists(prescription.PrescriptionId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullName", prescription.UserId);
+            return View(prescription);
+        }
+
     }
 }

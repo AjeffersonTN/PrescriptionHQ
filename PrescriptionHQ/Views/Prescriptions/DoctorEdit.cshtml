@@ -1,17 +1,18 @@
 ﻿@model PrescriptionHQ.Models.Prescription
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "DoctorEdit";
 }
 
-<h1>Create</h1>
+<h1>DoctorEdit</h1>
 
 <h4>Prescription</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="DoctorEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PrescriptionId" />
             <div class="form-group">
                 <label asp-for="Drug" class="control-label"></label>
                 <input asp-for="Drug" class="form-control" />
@@ -37,37 +38,31 @@
                 <input asp-for="Refills" class="form-control" />
                 <span asp-validation-for="Refills" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="SpecialInstructions" class="control-label"></label>
-                <input asp-for="SpecialInstructions" class="form-control" />
-                <span asp-validation-for="SpecialInstructions" class="text-danger"></span>
-            </div>
+            
             <div class="form-group">
                 <label asp-for="DatePrescribed" class="control-label"></label>
                 <input asp-for="DatePrescribed" class="form-control" />
                 <span asp-validation-for="DatePrescribed" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DateFilled" class="control-label"></label>
-                <input asp-for="DateFilled" class="form-control" />
-                <span asp-validation-for="DateFilled" class="text-danger"></span>
+                <label asp-for="SpecialInstructions" class="control-label"></label>
+                <input asp-for="SpecialInstructions" class="form-control" />
+                <span asp-validation-for="SpecialInstructions" class="text-danger"></span>
             </div>
+         
             <div class="form-group">
-                <label asp-for="UserId" name="Patient" class="control-label">Patient Name</label>
+                <label asp-for="UserId" class="control-label">Patient Name</label>
                 <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
-
             <div class="form-group">
-                <input type="submit" value="Save Prescription" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="PharmacyRequest">Back to List</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
