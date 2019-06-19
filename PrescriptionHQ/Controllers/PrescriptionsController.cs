@@ -99,9 +99,27 @@ namespace PrescriptionHQ.Controllers
 
             return View(prescription);
         }
-      
+        // GET: Prescriptions/Details/5
+        public async Task<IActionResult> DoctorDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var prescription = await _context.Prescription
+             .Include(p => p.User)
+             .Where(p => p.UserId != null)
+             .FirstOrDefaultAsync(m => m.PrescriptionId == id);
+
+            if (prescription == null)
+            {
+                return NotFound();
+            }
+
+            return View(prescription);
+        }
         //Get: Prescriptions for the member view 
-        
+
         [Authorize]
         public async Task<IActionResult> GetActivePrescriptions()
         {
@@ -119,11 +137,10 @@ namespace PrescriptionHQ.Controllers
         public async Task<IActionResult> PharmacyVault()
         {
             var customerList = _context.Prescription
-                .Include(p => p.User)                
+                .Include(p => p.User)
                 .Where(p => p.UserId != null);
-
-
-            return View(await customerList.Distinct().ToListAsync());
+                       
+            return View(await customerList.ToListAsync());
 
         }
 
@@ -172,6 +189,7 @@ namespace PrescriptionHQ.Controllers
             }
 
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullName", prescription.User);
+            ViewData["PatientName"] = new SelectList(_context.Users, "FullName", "FullName");
             return View(prescription);
         }
         //Capture current user refill request information and send to list
