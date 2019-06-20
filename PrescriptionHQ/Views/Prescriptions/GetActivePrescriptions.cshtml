@@ -4,102 +4,122 @@
     ViewData["Title"] = "GetActivePrescriptions";
 }
 
+<style>
+    body {
+        background-image: url(https://st3.depositphotos.com/8151032/12775/i/950/depositphotos_127750686-stock-photo-lot-of-colorful-medication-and.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .display-4 {
+        font-weight: 600;
+        border-radius: 50%;
+        /*transform: rotate(-50deg);*/
+        position: center;
+    }
+
+    .text-center {
+        font-size: large;
+        font-weight: 500;
+    }
+</style>
+
 <div class="card" style="width: auto;">
 
-<div class="card-title">
-<h1>Active Prescriptions</h1>
-</div>
-    <div class="card-body">
-    <table class="table">
-
-        <thead>
-            <tr>
-                <th>
-                    Patient Name
-                </th>
-
-                <th>
-                    Drug
-                </th>
-                <th>
-                    Dosage
-                </th>
-                <th>
-                    Quantity
-                </th>
-                <th>
-                    Frequency
-                </th>
-                <th>
-                    Date Filled
-                </th>
-                <th>
-                    Date Prescribed
-                </th>
-                <th>
-                    Refills
-                </th>
-                <th>
-                    Special Instructions
-                </th>
-                <th>
-                    Refill Request
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.FullName)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Drug)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Dosage)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Quantity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Frequency)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateFilled)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DatePrescribed)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Refills)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SpecialInstructions)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RefillRequested)
-                    </td>
-
-
-                    <td>
-                        @if (item.RefillRequested == null)
-                        {
-
-                            <a asp--area="" asp-controller="Prescriptions" asp-action="RefillStatus" asp-route-id="@item.PrescriptionId">Refill</a>
-                        }
-                        else
-                        {
-                            <a asp--area="" asp-controller="Prescriptions" asp-action="GetActivePrescriptions" onclick="return alert('Your refill request is currently being processed. Another request can not be requested at this time for this prescription.')">Refill</a>
-                        }
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+    <div class="card-title">
+        <h1>Active Prescriptions</h1>
     </div>
+    <div class="card-body">
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th>
+                        Patient Name
+                    </th>
+
+                    <th>
+                        Drug
+                    </th>
+                    <th>
+                        Dosage
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Frequency
+                    </th>
+                    <th>
+                        Date Filled
+                    </th>
+                    <th>
+                        Date Prescribed
+                    </th>
+                    <th>
+                        Refills
+                    </th>
+                    <th>
+                        Special Instructions
+                    </th>
+                    <th>
+                        Refill Request
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.FullName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Drug)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dosage)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Frequency)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateFilled)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DatePrescribed)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Refills)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SpecialInstructions)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RefillRequested)
+                        </td>
+
+
+                        <td>
+                            @if (item.RefillRequested == null)
+                            {
+
+                                <a asp--area="" asp-controller="Prescriptions" asp-action="RefillStatus" asp-route-id="@item.PrescriptionId">Refill</a>
+                            }
+                            else
+                            {
+                                <a asp--area="" asp-controller="Prescriptions" asp-action="GetActivePrescriptions" onclick="return alert('Your refill request is currently being processed. Another request can not be requested at this time for this prescription.')">Refill</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
