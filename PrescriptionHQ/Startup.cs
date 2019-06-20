@@ -13,11 +13,34 @@ using Microsoft.EntityFrameworkCore;
 using PrescriptionHQ.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PrescriptionHQ.Models;
 
 namespace PrescriptionHQ
 {
     public class Startup
     {
+
+
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            //adding custom roles
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<User>>();
+
+            string[] roleNames = { "Pharmacy", "Doctor", "Member" };
+            IdentityResult roleResulter;
+
+            foreach (var roleName in roleNames)
+            {
+                //creating the roles and seeding them to the database
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    roleResulter = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+        }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -38,7 +61,8 @@ namespace PrescriptionHQ
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<User>()
+                .AddRoles<IdentityRole>()//added to fix exception error on build
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -46,7 +70,7 @@ namespace PrescriptionHQ
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -72,6 +96,8 @@ namespace PrescriptionHQ
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            CreateRoles(serviceProvider).Wait();
         }
+
     }
 }

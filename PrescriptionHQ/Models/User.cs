@@ -7,7 +7,63 @@ using Microsoft.AspNetCore.Identity;
 
 namespace PrescriptionHQ.Models
 {
-    public class User
+    public class User : IdentityUser
     {
+        public User()
+        {
+
+        }
+
+        [Required(ErrorMessage = "You must your first name")]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "You must your last name.")]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Full Name")]
+        public string FullName {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+    }
+
+        [Required(ErrorMessage = "You must provide a street address.")]
+        [Display(Name = "Address")]
+        public string StreetAddress { get; set; }
+
+        [Required(ErrorMessage = "You must provide a city.")]
+        public string City { get; set; }
+
+        [Required(ErrorMessage = "You must provide a state.")]
+        public string State { get; set; }
+
+        [Required(ErrorMessage = "You must provide a valid zip code.")]
+        [DataType(DataType.PostalCode)]
+        [Display(Name = "Zip Code")]
+        public int ZipCode { get; set; }
+
+
+        [Required(ErrorMessage = "You must provide a valid birthdate.")] 
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Date of Birth")]
+        public DateTime DOB { get; set; }
+
+        [Required(ErrorMessage = "You must provide your gender.")]
+        public string Gender { get; set; }
+
+        [Required(ErrorMessage = "You must provide your allergies.")]
+        public string Allgeries { get; set; }
+
+            [Required(ErrorMessage = "You must provide a phone number.")]
+        [DataType(DataType.PhoneNumber)]
+        public string Phone { get; set; }
+
+        public virtual ICollection<Prescription> Prescriptions { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
     }
 }

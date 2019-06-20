@@ -1,0 +1,73 @@
+﻿@model PrescriptionHQ.Models.Prescription
+
+@{
+    ViewData["Title"] = "DoctorDetails";
+}
+
+<h1>DoctorDetails</h1>
+
+<div>
+    <h4>Prescription</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PatientName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PatientName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Drug)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Drug)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Dosage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Dosage)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Frequency)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Frequency)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Refills)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Refills)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateFilled)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateFilled)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DatePrescribed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DatePrescribed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SpecialInstructions)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SpecialInstructions)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="DoctorEdit" asp-route-id="@Model.PrescriptionId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

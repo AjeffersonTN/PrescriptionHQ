@@ -1,0 +1,99 @@
+﻿@model IEnumerable<PrescriptionHQ.Models.Prescription>
+
+@{
+    ViewData["Title"] = "GetActivePrescriptions";
+}
+
+<h1>Active Prescriptions</h1>
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>
+                Patient Name
+            </th>
+
+            <th>
+                Drug
+            </th>
+            <th>
+                Dosage
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Frequency
+            </th>
+            <th>
+                Date Filled
+            </th>
+            <th>
+                Date Prescribed
+            </th>
+            <th>
+                Refills
+            </th>
+            <th>
+                Special Instructions
+            </th>
+            <th>
+                Refill Request
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FullName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Drug)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dosage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Frequency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateFilled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatePrescribed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Refills)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecialInstructions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RefillRequested)
+            </td>
+       
+
+            <td>
+                @if (item.RefillRequested == null)
+                {
+
+                <a asp--area="" asp-controller="Prescriptions" asp-action="RefillStatus" asp-route-id="@item.PrescriptionId" >Refill</a>
+                }
+                else
+                {
+            <a asp--area="" asp-controller="Prescriptions" asp-action="GetActivePrescriptions" onclick="return alert('Your refill request is currently being processed. Another request can not be requested at this time for this prescription.')">Refill</a>
+                }
+             </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
