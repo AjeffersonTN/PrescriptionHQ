@@ -3,80 +3,111 @@
 @{
     ViewData["Title"] = "PharmacyRequest";
 }
+<style>
+    body {
+        background-image: url(https://st3.depositphotos.com/8151032/12775/i/950/depositphotos_127750686-stock-photo-lot-of-colorful-medication-and.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 
-<h1>Prescription Request</h1>
+    .display-4 {
+        font-weight: 600;
+        border-radius: 50%;
+        /*transform: rotate(-50deg);*/
+        position: center;
+    }
 
-@using (Html.BeginForm())
-{
-    <p>
-        Find by name: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
-    </p>
-}
-<table class="table">
-    <tr>
+    .text-center {
+        font-size: large;
+        font-weight: 500;
+    }
+  .card {
+        background-color:#f4ffd9;
+    }
+</style>
 
-    <thead>
-        <tr>
+<div class="card" style="width: auto;">
 
-            <th>
-                Refill Request  @*@Html.ActionLink("Patient Name", "PharmacyRequest", new { sortOrder = ViewBag.NameSortParm })*@
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Drug)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dosage)
-            </th>
+    <div class="card-title">
+        <h1>Prescription Request</h1>
+    </div>
 
-            <th>
-                @Html.DisplayNameFor(model => model.DateFilled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DatePrescribed)
-            </th>
-            <th>
-                @Html.ActionLink("Refill Requested", "PharmacyRequest", new { sortOrder = ViewBag.RefillSortParm })
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+    <div class="card-body">
+
+        @using (Html.BeginForm())
         {
+            <p>
+                Find by name: @Html.TextBox("SearchString")
+                <input type="submit" value="Search" />
+            </p>
+        }
+        <table class="table">
             <tr>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.FirstName)  @Html.DisplayFor(modelItem => item.User.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Drug)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Dosage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateFilled)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DatePrescribed)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RefillRequested)
-                </td>
+            <thead>
+                <tr>
 
-                <td>
+                    <th>
+                        Refill Request  @*@Html.ActionLink("Patient Name", "PharmacyRequest", new { sortOrder = ViewBag.NameSortParm })*@
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Drug)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Dosage)
+                    </th>
 
-                    <a asp-action="Details" asp-route-id="@item.PrescriptionId">Details</a> |
-                    <a asp-action="Edit" asp-route-id="@item.PrescriptionId">Fill </a> |
-                    <a asp--area="" asp-controller="Home" asp-action="Contact" asp-route-patientName="@item.PatientName" asp-route-patientEmail="@item.User.Email" onclick="return alert('Your email has been sent');">Notify Patient</a>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateFilled)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DatePrescribed)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Refill Requested", "PharmacyRequest", new { sortOrder = ViewBag.RefillSortParm })
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
 
-                </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.FirstName)  @Html.DisplayFor(modelItem => item.User.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Drug)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dosage)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateFilled)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DatePrescribed)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RefillRequested)
+                        </td>
 
-            </tr>
-        }
-    </tbody>
-</table>
+                        <td>
+
+                            <a asp-action="Details" asp-route-id="@item.PrescriptionId">Details</a> |
+                            <a asp-action="Edit" asp-route-id="@item.PrescriptionId">Fill </a> |
+                            <a asp--area="" asp-controller="Home" asp-action="Contact" asp-route-patientName="@item.PatientName" asp-route-patientEmail="@item.User.Email" onclick="return alert('Your email has been sent');">Notify Patient</a>
+
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

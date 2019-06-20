@@ -3,70 +3,100 @@
 @{
     ViewData["Title"] = "Details";
 }
+<style>
+    body {
+        background-image: url(https://st3.depositphotos.com/8151032/12775/i/950/depositphotos_127750686-stock-photo-lot-of-colorful-medication-and.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 
-<h1>Details</h1>
+    .display-4 {
+        font-weight: 600;
+        border-radius: 50%;
+        /*transform: rotate(-50deg);*/
+        position: center;
+    }
 
-<div>
-    <h4>Prescription</h4>
+    .text-center {
+        font-size: large;
+        font-weight: 500;
+    }
+    .card {
+        background-color:#f4ffd9;
+    }
+</style>
+
+
+<div class="card" style="width: auto;">
+
+    <div class="card-title">
+        <h1>Details</h1>
+    </div>
+    <div class="card-subtitle">
+        <h4>Prescription</h4>
+    </div>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-           Patient Name
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PatientName) 
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Drug)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Drug)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Dosage)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Dosage)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Frequency)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Frequency)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Refills)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Refills)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DateFilled)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DateFilled)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DatePrescribed)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DatePrescribed)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SpecialInstructions)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SpecialInstructions)
-        </dd>
-    </dl>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-2">
+                Patient Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PatientName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Drug)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Drug)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Dosage)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Dosage)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Quantity)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Quantity)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Frequency)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Frequency)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Refills)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Refills)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DateFilled)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DateFilled)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DatePrescribed)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DatePrescribed)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SpecialInstructions)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SpecialInstructions)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.PrescriptionId">Edit</a> |
+        <a asp-action="PharmacyRequest">Back to List</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.PrescriptionId">Edit</a> |
-    <a asp-action="PharmacyRequest">Back to List</a>
-</div>
+

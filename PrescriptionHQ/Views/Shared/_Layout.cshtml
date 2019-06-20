@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PrescriptionHQ</title>
+    <title >@ViewData["Title"] - PrescriptionHQ</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -19,9 +19,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PrescriptionHQ</a>
+                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">PrescriptionHQ</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,7 +31,7 @@
                     <ul class="navbar-nav flex-grow-1">
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         
                         <li>
@@ -40,13 +40,13 @@
                                 if (User.IsInRole("Pharmacy"))
                                 {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="PharmacyVault">Patient Details</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Prescriptions" asp-action="PharmacyVault">Patient Details</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="PharmacyRequest">Requests</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Prescriptions" asp-action="PharmacyRequest">Requests</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="Create">Prescribe</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Prescriptions" asp-action="Create">Prescribe</a>
                                 </li>
 
                             }
@@ -56,13 +56,13 @@
                                 if (User.IsInRole("Doctor"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="CreateRequest">Doctor's Corner</a>
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Prescriptions" asp-action="CreateRequest">Doctor's Corner</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="PharmacyVault">Patient Details</a>
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Prescriptions" asp-action="PharmacyVault">Patient Details</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="Index">Prescribed</a>
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Prescriptions" asp-action="Index">Prescribed</a>
                                     </li>
 
                                 }
@@ -72,7 +72,7 @@
                                 if (User.IsInRole("Member"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="GetActivePrescriptions">My Prescriptions</a>
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Prescriptions" asp-action="GetActivePrescriptions">My Prescriptions</a>
                                     </li>
 
                                 }
@@ -88,17 +88,11 @@
             <partial name="_CookieConsentPartial" />
             <main role="main" class="pb-3">
 
-                @*<p id='ddc-widget-search' data-version='20140401'>Medication search by Drugs.com</p>
-        <script src='https://www.drugs.com/widget/ddc-widget.js?v=4'></script>
-        <script>
-            var ddcw_search_theme = 'ddc';
-        </script>*@
                 <div class="searchDrug">
                     <p id='ddc-widget-search' data-version='20140401'>Medication search by Drugs.com</p>
                     <script src='https://www.drugs.com/widget/ddc-widget.js?v=4'></script>
                     <script>
-                        //var ddcw_search_theme = 'clean';
-                        //var ddcw_search_border_color = 'EBEEF0';
+                      
                     </script>
                 </div>
                 
@@ -108,7 +102,7 @@
             </main>
         </div>
 
-        <footer class="border-top footer text-muted">
+        <footer class="footer footer-dark">
             <div class="container">
                 &copy; 2019 - PrescriptionHQ - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>

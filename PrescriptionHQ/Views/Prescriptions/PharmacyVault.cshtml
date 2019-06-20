@@ -3,79 +3,109 @@
 @{
     ViewData["Title"] = "PharmacyVault";
 }
+<style>
+    body {
+        background-image: url(https://st3.depositphotos.com/8151032/12775/i/950/depositphotos_127750686-stock-photo-lot-of-colorful-medication-and.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 
-<h1>Patient Details</h1>
+    .display-4 {
+        font-weight: 600;
+        border-radius: 50%;
+        /*transform: rotate(-50deg);*/
+        position: center;
+    }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Name
-            </th>
+    .text-center {
+        font-size: large;
+        font-weight: 500;
+    }
+    .card {
+        background-color:#f4ffd9;
+    }
+</style>
 
-            <th>
-                Address
-            </th>
-            <th>
-                City, State
-            </th>
-          
-            <th>
-               Phone
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Date of Birth
-            </th>
-            <th>
-                Gender
-            </th>
-            <th>
-                Medications
-            </th>
+<div class="card" style="width: auto;">
+
+    <div class="card-title">
+
+        <h1>Patient Details</h1>
+    </div>
+    <div class="card-body">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Address
+                    </th>
+                    <th>
+                        City, State
+                    </th>
+
+                    <th>
+                        Phone
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Date of Birth
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        Medications
+                    </th>
 
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.FullName) 
-            </td>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.FullName)
+                        </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.User.StreetAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.City), @Html.DisplayFor(modelItem => item.User.State)   @Html.DisplayFor(modelItem => item.User.ZipCode)
-            </td>
-          
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.DOB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Gender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Drug)
-            </td>
-            <td>
-                <a href=@($"https://localhost:5001/Users/Details/{item.UserId}")>Details</a>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.StreetAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.City), @Html.DisplayFor(modelItem => item.User.State)   @Html.DisplayFor(modelItem => item.User.ZipCode)
+                        </td>
 
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.DOB)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Gender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Drug)
+                        </td>
+                        <td>
+                            <a href=@($"https://localhost:5001/Users/Details/{item.UserId}")>Details</a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 

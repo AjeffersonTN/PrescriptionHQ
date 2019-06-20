@@ -3,69 +3,102 @@
 @{
     ViewData["Title"] = "Create";
 }
+<style>
+    body {
+        background-image: url(https://st3.depositphotos.com/8151032/12775/i/950/depositphotos_127750686-stock-photo-lot-of-colorful-medication-and.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 
-<h1>Create</h1>
+    .display-4 {
+        font-weight: 600;
+        border-radius: 50%;
+        /*transform: rotate(-50deg);*/
+        position: center;
+    }
 
-<h4>Prescription</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Drug" class="control-label"></label>
-                <input asp-for="Drug" class="form-control" />
-                <span asp-validation-for="Drug" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Dosage" class="control-label"></label>
-                <input asp-for="Dosage" class="form-control" />
-                <span asp-validation-for="Dosage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Frequency" class="control-label"></label>
-                <input asp-for="Frequency" class="form-control" />
-                <span asp-validation-for="Frequency" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Refills" class="control-label"></label>
-                <input asp-for="Refills" class="form-control" />
-                <span asp-validation-for="Refills" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SpecialInstructions" class="control-label"></label>
-                <input asp-for="SpecialInstructions" class="form-control" />
-                <span asp-validation-for="SpecialInstructions" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DatePrescribed" class="control-label"></label>
-                <input asp-for="DatePrescribed" class="form-control" />
-                <span asp-validation-for="DatePrescribed" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateFilled" class="control-label"></label>
-                <input asp-for="DateFilled" class="form-control" />
-                <span asp-validation-for="DateFilled" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserId" name="Patient" class="control-label">Patient Name</label>
-                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
-            </div>
+    .text-center {
+        font-size: large;
+        font-weight: 500;
+    }
+    .card {
+        background-color:#f4ffd9;
+    }
+</style>
 
-            <div class="form-group">
-                <input type="submit" value="Save Prescription" class="btn btn-primary" />
-            </div>
-        </form>
+
+<div class="card" style="width: auto;">
+
+    <div class="card-title">
+
+        <h1>Create</h1>
     </div>
-</div>
 
-<div>
-    <a asp-action="PharmacyRequest">Back to List</a>
+    <div class="card-subtitle">
+        <h4>Prescription</h4>
+    </div>
+    <hr />
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Drug" class="control-label"></label>
+                        <input asp-for="Drug" class="form-control" />
+                        <span asp-validation-for="Drug" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Dosage" class="control-label"></label>
+                        <input asp-for="Dosage" class="form-control" />
+                        <span asp-validation-for="Dosage" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Quantity" class="control-label"></label>
+                        <input asp-for="Quantity" class="form-control" />
+                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Frequency" class="control-label"></label>
+                        <input asp-for="Frequency" class="form-control" />
+                        <span asp-validation-for="Frequency" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Refills" class="control-label"></label>
+                        <input asp-for="Refills" class="form-control" />
+                        <span asp-validation-for="Refills" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SpecialInstructions" class="control-label"></label>
+                        <input asp-for="SpecialInstructions" class="form-control" />
+                        <span asp-validation-for="SpecialInstructions" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DatePrescribed" class="control-label"></label>
+                        <input asp-for="DatePrescribed" class="form-control" />
+                        <span asp-validation-for="DatePrescribed" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DateFilled" class="control-label"></label>
+                        <input asp-for="DateFilled" class="form-control" />
+                        <span asp-validation-for="DateFilled" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserId" name="Patient" class="control-label">Patient Name</label>
+                        <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Save Prescription" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="PharmacyRequest">Back to List</a>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
