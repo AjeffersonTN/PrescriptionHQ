@@ -86,7 +86,13 @@ namespace PrescriptionHQ.Areas.Identity.Pages.Account
             [DataType(DataType.PhoneNumber)]
             public string Phone { get; set; }
 
+
+            [Required]
             public string Gender { get; set; }
+
+
+            [Required]
+            public string Allergies { get; set; }
 
             [Required]
             public string Role { get; set; }

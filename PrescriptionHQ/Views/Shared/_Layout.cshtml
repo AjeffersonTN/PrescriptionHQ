@@ -33,10 +33,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-
+                        
                         <li>
                             @if (User.Identity.IsAuthenticated)
                             {
@@ -51,6 +48,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Prescriptions" asp-action="Create">Prescribe</a>
                                 </li>
+
                             }
                         }
                             @if (User.Identity.IsAuthenticated)
@@ -89,15 +87,24 @@
         <div class="container">
             <partial name="_CookieConsentPartial" />
             <main role="main" class="pb-3">
+
+                @*<p id='ddc-widget-search' data-version='20140401'>Medication search by Drugs.com</p>
+        <script src='https://www.drugs.com/widget/ddc-widget.js?v=4'></script>
+        <script>
+            var ddcw_search_theme = 'ddc';
+        </script>*@
+                <div class="searchDrug">
+                    <p id='ddc-widget-search' data-version='20140401'>Medication search by Drugs.com</p>
+                    <script src='https://www.drugs.com/widget/ddc-widget.js?v=4'></script>
+                    <script>
+                        //var ddcw_search_theme = 'clean';
+                        //var ddcw_search_border_color = 'EBEEF0';
+                    </script>
+                </div>
                 
-                <p id='ddc-widget-search' data-version='20140401'>Medication search by Drugs.com</p>
-                <script src='https://www.drugs.com/widget/ddc-widget.js?v=4'></script>
-                <script>
-                    var ddcw_search_theme = 'ddc';
-                </script>
 
 
-        @RenderBody()
+                @RenderBody()
             </main>
         </div>
 
