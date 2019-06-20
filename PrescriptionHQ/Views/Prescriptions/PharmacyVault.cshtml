@@ -3,79 +3,86 @@
 @{
     ViewData["Title"] = "PharmacyVault";
 }
+<div class="card" style="width: auto;">
 
-<h1>Patient Details</h1>
+    <div class="card-title">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Name
-            </th>
+        <h1>Patient Details</h1>
+    </div>
+    <div class="card-body">
 
-            <th>
-                Address
-            </th>
-            <th>
-                City, State
-            </th>
-          
-            <th>
-               Phone
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Date of Birth
-            </th>
-            <th>
-                Gender
-            </th>
-            <th>
-                Medications
-            </th>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Address
+                    </th>
+                    <th>
+                        City, State
+                    </th>
+
+                    <th>
+                        Phone
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Date of Birth
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        Medications
+                    </th>
 
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.FullName) 
-            </td>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.FullName)
+                        </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.User.StreetAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.City), @Html.DisplayFor(modelItem => item.User.State)   @Html.DisplayFor(modelItem => item.User.ZipCode)
-            </td>
-          
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.DOB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Gender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Drug)
-            </td>
-            <td>
-                <a href=@($"https://localhost:5001/Users/Details/{item.UserId}")>Details</a>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.StreetAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.City), @Html.DisplayFor(modelItem => item.User.State)   @Html.DisplayFor(modelItem => item.User.ZipCode)
+                        </td>
 
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.DOB)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Gender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Drug)
+                        </td>
+                        <td>
+                            <a href=@($"https://localhost:5001/Users/Details/{item.UserId}")>Details</a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
