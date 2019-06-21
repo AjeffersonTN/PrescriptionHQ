@@ -134,12 +134,18 @@ namespace PrescriptionHQ.Controllers
 
         //Get: Pharmacy vault get customer list and prescriptions 
         [Authorize]
-        public async Task<IActionResult> PharmacyVault()
+        public async Task<IActionResult> PharmacyVault(string searchString)
         {
             var customerList = _context.Prescription
                 .Include(p => p.User)
                 .Where(p => p.UserId != null);
-                       
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                customerList = customerList.Where(c => c.User.FullName.Contains(searchString));
+
+            }
+
             return View(await customerList.ToListAsync());
 
         }

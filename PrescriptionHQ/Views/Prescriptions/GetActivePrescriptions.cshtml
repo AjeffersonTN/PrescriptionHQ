@@ -109,14 +109,21 @@
 
 
                         <td>
-                            @if (item.RefillRequested == null)
+                            @if (item.RefillRequested == null && item.Refills > 0)
                             {
 
                                 <a asp--area="" asp-controller="Prescriptions" asp-action="RefillStatus" asp-route-id="@item.PrescriptionId">Refill</a>
                             }
+
+                            else if (item.Refills == 0)
+                            {
+                                <a asp--area="" asp-controller="Prescriptions" asp-action="GetActivePrescriptions" onclick="return alert('There are no more refills availble for this prescription.')">Refill</a>
+                            }
+
                             else
                             {
                                 <a asp--area="" asp-controller="Prescriptions" asp-action="GetActivePrescriptions" onclick="return alert('Your refill request is currently being processed. Another request can not be requested at this time for this prescription.')">Refill</a>
+
                             }
                         </td>
                     </tr>

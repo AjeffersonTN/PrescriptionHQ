@@ -33,6 +33,13 @@
         <h1>Patient Details</h1>
     </div>
     <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            <p>
+                Find by name: @Html.TextBox("SearchString")
+                <input type="submit" value="Search" />
+            </p>
+        }
 
         <table class="table">
             <thead>
@@ -74,41 +81,41 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.FullName)
-                    </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.FullName)
+                        </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.StreetAddress)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.City), @Html.DisplayFor(modelItem => item.User.State)   @Html.DisplayFor(modelItem => item.User.ZipCode)
-                    </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.StreetAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.City), @Html.DisplayFor(modelItem => item.User.State)   @Html.DisplayFor(modelItem => item.User.ZipCode)
+                        </td>
 
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.User.Phone)
-                    </td>*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.DOB)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.Gender)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.Allgeries)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Drug)
-                    </td>
-                    <td>
-                        <a href=@($"https://localhost:5001/Users/Details/{item.UserId}")>Details</a>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.User.Phone)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.DOB)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Gender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Allgeries)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Drug)
+                        </td>
+                        <td>
+                            <a href=@($"https://localhost:5001/Users/Details/{item.UserId}")>Details</a>
 
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
